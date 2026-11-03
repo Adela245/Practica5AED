@@ -237,15 +237,63 @@ Escribe una función que detecte los outliers de un vector $x$ para cada uno de 
 ```{r , include = FALSE}
 # Regla 3 sigma
 
+reglasigma <- function(x){
+  media <- mean(x, na.rm= T)
+  sd <- sd(x, na.rm= T)
+  n <- length(x)
+  for (i in 1:n){
+    if (abs(x[i]-media) >3*sd){
+      return('Outlier', x[i])
+    
+  }
+  
+  }
+  
+}
+
+
 
 # Identificador Hampel
-
+reglahampel <- function(x){
+  mediana <- median(x, na.rm = T)
+  madm <- 1.4826 * median(abs(x- mediana), na.rm = T)
+  n <- length(x)
+  for (i in 1:n){
+    if (abs(x[i] > 3*madm))
+      return('Outlier', x[i])
+  }
+  
+}
 
 
 # Regla boxplot
+reglaboxplot <- function(x){
+  Q1 <- quantile(x, probs = 0.25, na.rm = T)
+  Q3 <- quantile(x, probs = 0.75, na.rm = T)
+  iqr <- Q3- Q1
+  n <- length(x)
+  inf <- Q1 - 1.5*iqr
+  sup <- Q3 + 1.5*iqr
+  for (i in 1:n){
+    if(x[i] < inf | x[i]> sup){
+      return('Outlier', x[i])
+    }
+  }
+}
 
 
 # Percentiles
+
+reglapercentil <- function(x){
+  p5 <- quantile(x, probs = 0.05, na.rm = T)
+  p95 <- quantile(x, probs = 0.95, na.rm = T)
+  n <- length(x)
+  for (i in 1:n){
+    if(x[i] < p5 | x[i]> p95){
+      return('Outlier', x[i])
+    }
+  }
+}
 
 ```
 

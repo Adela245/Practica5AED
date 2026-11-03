@@ -315,6 +315,14 @@ cat('Método  Hampel=', sum(outliers$Petal.Length_Hampel), '\n')
 cat('Método Boxplot =', sum(outliers$Petal.Length_boxplot), '\n')
 cat('Método Percentil =', sum(outliers$Petal.Length_percentil), '\n')
 
+sort(outliers$Petal.Length[outliers$Petal.Length_sigma])
+
+sort(outliers$Petal.Length[outliers$Petal.Length_Hampel])
+
+sort(outliers$Petal.Length[outliers$Petal.Length_boxplot])
+
+sort(outliers$Petal.Length[outliers$Petal.Length_percentil])
+
 ```
 
 ## Ejercicio 8: Representación gráfica

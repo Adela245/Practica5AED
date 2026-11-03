@@ -87,10 +87,15 @@ dirty_iris$Sepal.Width[order(dirty_iris$Sepal.Width, decreasing = F)]
 
 dirty_iris$Petal.Width[order(dirty_iris$Petal.Width, decreasing = T)]
 dirty_iris$Petal.Width[order(dirty_iris$Petal.Width, decreasing = F)]
+
+dirty_iris$Petal.Length[order(dirty_iris$Petal.Length, decreasing = T)]
+dirty_iris$Petal.Length[order(dirty_iris$Petal.Length, decreasing = F)]
 ```
 Visualizando los datos las inconsistencias que vemos son las siguientes:
 
 - En la longitud del sepalo, aparece como valor 0 y también valores NA
+
+- En la longitud del pétalo, aparece como valor 0 y también valores NA
 
 - En el grosor del sépalo aparece un número negativo, además de valores NA
 
@@ -121,18 +126,21 @@ Nota: Puedes reemplazar los valores para cada variable del dataframe usando `mut
 dirty_iris$Petal.Width[!is.finite(dirty_iris$Petal.Width)] <- NA
 dirty_iris$Sepal.Width[!is.finite(dirty_iris$Sepal.Width)] <- NA
 dirty_iris$Petal.Length[!is.finite(dirty_iris$Petal.Length)] <- NA
+dirty_iris$Sepal.Length[!is.finite(dirty_iris$Sepal.Length)] <- NA
 
 # Quito el valor negativo
 
 dirty_iris$Sepal.Width[dirty_iris$Sepal.Width < 0] <- NA
 dirty_iris$Petal.Width[dirty_iris$Petal.Width < 0] <- NA
 dirty_iris$Petal.Length[dirty_iris$Petal.Length < 0] <- NA
+dirty_iris$Sepal.Length[dirty_iris$Sepal.Length < 0] <- NA
 
 # Quito el valor nulo
 
 dirty_iris$Sepal.Length[dirty_iris$Sepal.Length == 0] <- NA
 dirty_iris$Sepal.Width[dirty_iris$Sepal.Width == 0] <- NA
 dirty_iris$Petal.Width[dirty_iris$Petal.Width == 0] <- NA
+dirty_iris$Petal.Length[dirty_iris$Petal.Length == 0] <- NA
 
 
 
@@ -145,6 +153,18 @@ dirty_iris$Petal.Width[dirty_iris$Petal.Width == 0] <- NA
   * Emplea después la función `na.omit` para quedarnos solo con las filas con datos completos en un nuevo data frame `clean_iris`.
 
 ```{r Solucion ejercicio 3, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
+
+numero_PW <- sum(complete.cases(dirty_iris$Petal.Width))
+porPW <- numero_PW/length(dirty_iris$Petal.Width)
+cat('Número de datos no perdidos en Petal.Width', numero_PW, '\n', 'Porcentaje', porPW)
+
+numero_PL <- sum(complete.cases(dirty_iris$Petal.Length))
+porPL <- numero_PL/length(dirty_iris$Petal.Length)
+cat('Número de datos no perdidos en Petal.Length', numero_PL, '\n', 'Porcentaje', porPL)
+
+numero_SW <- sum(complete.cases(dirty_iris$Sepal.Width))
+porSW <- numero_SW/length(dirty_iris$Setal.Width)
+cat('Número de datos no perdidos en Sepal.Width', numero_PS, '\n', 'Porcentaje', porPS)
 
 ```
 

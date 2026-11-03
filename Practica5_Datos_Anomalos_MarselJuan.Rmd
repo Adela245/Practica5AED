@@ -255,7 +255,7 @@ reglasigma <- function(x){
 reglahampel <- function(x){
   mediana <- median(x, na.rm = T)
   madm <- 1.4826 * median(abs(x- mediana), na.rm = T)
-  return(abs(x) > 3*madm)
+  return(abs(x - mediana) > 3*madm )
 
 }
 
@@ -289,7 +289,7 @@ Utiliza la función `mutate` y `across` para identificar los outliers en la vari
 
 ```{r Solucion ejercicio 6, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
 
-clean_iris %>% mutate(across( where(is.numeric),
+outliers <- clean_iris %>% mutate(across( where(is.numeric),
                       list(
                         sigma= reglasigma,
                         Hampel = reglahampel,
@@ -309,6 +309,11 @@ En los métodos de detección de outliers analizados, examina los resultados com
 - Los valores etiquetados como outliers (ordenados de menor a mayor).
 
 ```{r Solucion ejercicio 7, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
+
+cat('Método 3 sigmas =', sum(outliers$Petal.Length_sigma), '\n')
+cat('Método  Hampel=', sum(outliers$Petal.Length_Hampel), '\n')
+cat('Método Boxplot =', sum(outliers$Petal.Length_boxplot), '\n')
+cat('Método Percentil =', sum(outliers$Petal.Length_percentil), '\n')
 
 ```
 

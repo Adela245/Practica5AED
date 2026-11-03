@@ -154,17 +154,11 @@ dirty_iris$Petal.Length[dirty_iris$Petal.Length == 0] <- NA
 
 ```{r Solucion ejercicio 3, include=TRUE, echo=TRUE, eval=TRUE, results=TRUE}
 
-numero_PW <- sum(complete.cases(dirty_iris$Petal.Width))
-porPW <- numero_PW/length(dirty_iris$Petal.Width)
-cat('Número de datos no perdidos en Petal.Width', numero_PW, '\n', 'Porcentaje', porPW)
 
-numero_PL <- sum(complete.cases(dirty_iris$Petal.Length))
-porPL <- numero_PL/length(dirty_iris$Petal.Length)
-cat('Número de datos no perdidos en Petal.Length', numero_PL, '\n', 'Porcentaje', porPL)
 
-numero_SW <- sum(complete.cases(dirty_iris$Sepal.Width))
-porSW <- numero_SW/length(dirty_iris$Setal.Width)
-cat('Número de datos no perdidos en Sepal.Width', numero_PS, '\n', 'Porcentaje', porPS)
+sum(complete.cases(dirty_iris))/(nrow(dirty_iris))* 100
+
+clean_iris <- na.omit(dirty_iris)
 
 ```
 
